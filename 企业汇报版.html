@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>毕业进度与职业规划 · 项目进展报告</title>
+  <style>
+    :root {
+      --canvas: #edf1f5;
+      --surface: #ffffff;
+      --ink: #172338;
+      --muted: #5f6c7b;
+      --navy: #122a49;
+      --blue: #2764c5;
+      --blue-soft: #eaf1fd;
+      --teal: #16827b;
+      --amber: #d5962b;
+      --red: #c54a4a;
+      --line: #dce3eb;
+      --shadow: 0 18px 45px rgba(20, 38, 63, .1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: Inter, "SF Pro Display", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .report {
+      width: min(1120px, calc(100% - 32px));
+      margin: 34px auto 64px;
+    }
+
+    .masthead {
+      padding: clamp(30px, 6vw, 58px);
+      background: linear-gradient(125deg, #10243f 0%, #173d6b 64%, #1f5685 100%);
+      color: #fff;
+      border-radius: 18px 18px 0 0;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .masthead::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -150px;
+      width: 390px;
+      height: 390px;
+      border: 55px solid rgba(255,255,255,.055);
+      border-radius: 50%;
+    }
+
+    .kicker {
+      margin: 0 0 16px;
+      color: #9fc5f5;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 18em;
+      font-size: clamp(34px, 5.5vw, 56px);
+      line-height: 1.25;
+      letter-spacing: -.02em;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      margin-top: 26px;
+      color: #c9dbef;
+      font-size: 15px;
+    }
+
+    .content {
+      padding: clamp(24px, 5.2vw, 56px);
+      background: #f8fafc;
+      border-radius: 0 0 18px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 0 0 42px;
+    }
+
+    .summary-card {
+      min-height: 132px;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: 10px;
+    }
+
+    .summary-card:nth-child(2) { border-top-color: var(--teal); }
+    .summary-card:nth-child(3) { border-top-color: var(--amber); }
+    .summary-card:nth-child(4) { border-top-color: var(--red); }
+
+    .summary-label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .summary-value {
+      display: block;
+      margin-top: 10px;
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .lead {
+      margin: 0 0 45px;
+      padding: 23px 25px;
+      background: var(--blue-soft);
+      border-left: 5px solid var(--blue);
+      border-radius: 0 10px 10px 0;
+      color: #263e5e;
+      font-size: 19px;
+    }
+
+    section { margin-top: 54px; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 22px;
+      padding-bottom: 13px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    .section-code {
+      flex: 0 0 auto;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 27px;
+      line-height: 1.4;
+    }
+
+    p { margin: 0 0 1.1em; }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin: 0 0 16px;
+      padding: 5px 10px;
+      background: #e7f5f1;
+      color: #116e63;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #1da58f;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(29,165,143,.12);
+    }
+
+    .workstreams,
+    .career-grid,
+    .strategy-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .workstreams { grid-template-columns: repeat(2, 1fr); }
+    .career-grid { grid-template-columns: repeat(3, 1fr); }
+    .strategy-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .panel {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    .panel p:last-child { margin-bottom: 0; }
+
+    .panel-number {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 28px;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .key-point {
+      padding: .08em .18em;
+      background: linear-gradient(transparent 50%, #cfe0ff 50%);
+      color: inherit;
+      font-weight: 800;
+    }
+
+    .underline {
+      font-weight: 800;
+      text-decoration: underline;
+      text-decoration-color: #73a1eb;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 4px;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 26px 0 30px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .timeline li {
+      position: relative;
+      padding: 38px 14px 0 0;
+      border-top: 3px solid #b7c8dc;
+    }
+
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 0;
+      width: 14px;
+      height: 14px;
+      background: var(--surface);
+      border: 3px solid var(--blue);
+      border-radius: 50%;
+    }
+
+    .timeline li:last-child { padding-right: 0; }
+
+    .timeline time {
+      display: block;
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .timeline span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .risk-callout {
+      margin: 25px 0;
+      padding: 20px 24px;
+      background: #fff6e5;
+      border: 1px solid #f0d49b;
+      border-left: 5px solid var(--amber);
+      border-radius: 0 10px 10px 0;
+    }
+
+    .risk-callout strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #7d5413;
+    }
+
+    .observation {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .outlook {
+      margin-top: 44px;
+      padding: 28px;
+      background: var(--navy);
+      color: #e8eef7;
+      border-radius: 12px;
+    }
+
+    .outlook h2 { color: #fff; }
+    .outlook p:last-child { margin-bottom: 0; }
+    .outlook .underline { text-decoration-color: #75a7ef; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 38px;
+      padding-top: 20px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .summary-grid, .career-grid { grid-template-columns: repeat(2, 1fr); }
+      .summary-card:last-child, .career-grid .panel:last-child { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 650px) {
+      body { font-size: 17px; }
+      .report { width: 100%; margin: 0; }
+      .masthead, .content { border-radius: 0; }
+      .summary-grid, .workstreams, .career-grid, .strategy-grid { grid-template-columns: 1fr; }
+      .summary-card:last-child, .career-grid .panel:last-child { grid-column: auto; }
+      .timeline { grid-template-columns: 1fr; gap: 0; }
+      .timeline li { padding: 0 0 24px 31px; border-top: 0; border-left: 3px solid #b7c8dc; }
+      .timeline li::before { top: 3px; left: -9px; }
+      .timeline li:last-child { border-left-color: transparent; }
+      footer { display: block; }
+    }
+
+    @media print {
+      body { background: #fff; font-size: 15px; }
+      .report { width: 100%; margin: 0; }
+      .masthead, .content { box-shadow: none; border-radius: 0; }
+      .masthead { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .summary-card, .panel, .risk-callout, .observation, .outlook { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="report">
+    <header class="masthead">
+      <p class="kicker">Project Status Report · 0722</p>
+      <h1>毕业进度与未来职业规划同步</h1>
+      <div class="meta">
+        <span>汇报对象：爸爸妈妈</span>
+        <span>汇报主题：学业、求职与时间线</span>
+        <span>当前阶段：毕业冲刺期</span>
+      </div>
+    </header>
+
+    <main class="content">
+      <section aria-label="执行摘要" style="margin-top: 0;">
+        <div class="summary-grid">
+          <div class="summary-card">
+            <span class="summary-label">当前核心任务</span>
+            <span class="summary-value">论文终稿与最终展示</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">求职策略</span>
+            <span class="summary-value">加拿大优先，国内外并行</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">职业方向</span>
+            <span class="summary-value">专业对口 / AI 应用 / PM</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">关键约束</span>
+            <span class="summary-value">房租、学签与工签窗口</span>
+          </div>
+        </div>
+        <p class="lead">最近这几天我努力高强度地思考和行动。我意识到任务不能等到完成后才反馈，而应该实时汇报进度。我们全家人现在都在一起努力，所以我主动同步最新进展、时间线以及对职业方向的深度思考，让你们了解，也可以更好地支持我。</p>
+      </section>
+
+      <section id="progress">
+        <div class="section-title">
+          <span class="section-code">01 / PROGRESS</span>
+          <h2>当前学业进度与求职启动</h2>
+        </div>
+        <span class="status">执行中</span>
+        <p>这周的前几天以及接下来的时间，我的核心任务是<strong class="underline">全力准备论文的终稿和最后的展示（Presentation）环节</strong>，这是顺利毕业的基石。</p>
+        <p>同时，针对毕业后的规划，我已经开始动起来了：</p>
+        <div class="workstreams">
+          <div class="panel">
+            <h3>海外工作流</h3>
+            <p>这几天我正在密集预约和我的 Mentor（导师）、TA（博士生学姐）以及林学院的 Admission &amp; Admin Coordinator 进行对话，去摸清本地的求职资源和学术时间线。</p>
+          </div>
+          <div class="panel">
+            <h3>国内工作流</h3>
+            <p>我也开始着手了解，目前去看了一些留学生回国（比如杭州）的引才政策，目前看来是以各类补贴居多。后续方向和信息搜索仍需要加强。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="career">
+        <div class="section-title">
+          <span class="section-code">02 / DIRECTION</span>
+          <h2>三大职业方向</h2>
+        </div>
+        <p>结合我的<span class="key-point">“英语本科 + UBC 林业硕士”的交叉背景</span>，以及我个人的兴趣，我目前梳理出了三个非常清晰的就业与发展方向。在接下来的导师、学姐面谈中，可能会有更多新的想法。</p>
+        <div class="career-grid">
+          <div class="panel">
+            <span class="panel-number">01</span>
+            <h3>继续深造或对口专业方向</h3>
+            <p>发挥 UBC 林业专业的顶尖口碑，去投递相关的国际非政府组织（NGO）或可持续发展部门。在这个方向上，我想到达的最高位置是加入联合国等国际组织，充分发挥专业价值。</p>
+          </div>
+          <div class="panel">
+            <span class="panel-number">02</span>
+            <h3>时代风口行业（AI 应用端）</h3>
+            <p>我敏锐地意识到很多 AI 企业正在飞速发展。除了开发 AI 的工程师和程序员之外，企业其实更需要大量会高阶使用 AI 工具的人。就国内而言，大部分高校内尚未对非人工智能专业的学生进行专业的 AI 使用培训，而企业却在更多地使用，这说明中间仍有巨大的学习和培训红利余地。</p>
+          </div>
+          <div class="panel">
+            <span class="panel-number">03</span>
+            <h3>产品经理（PM）或项目经理</h3>
+            <p>我意识到自己对产品的开发、项目的策划与落地等工作有着比较高的兴趣。比起从 0 开始凭灵感做一个全新的东西，我对<span class="key-point">“让一个东西从 1 到 100 真正进入到市场中”</span>的过程感到十分兴奋。而且 PM 是各种公司不可或缺的职位，在这个方向上，我会想要加入全球范围内各个产业内最前沿的国际企业。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline">
+        <div class="section-title">
+          <span class="section-code">03 / TIMELINE</span>
+          <h2>关键时间节点与风险分摊</h2>
+        </div>
+        <p>这几天我也看到一个视频说：有钱人为什么能积累财富，就是因为他们看到机会就会行动、就会下手，因为这个机会是不会等待你的。（虽然说也需要考虑对这些人来说可能本来试错成本就小。）</p>
+        <p>我非常清楚眼前的现实压力：</p>
+        <ol class="timeline" aria-label="重要时间线">
+          <li><time>8 月</time><span>完成课程</span></li>
+          <li><time>8 月 31 日</time><span>当前房租截止</span></li>
+          <li><time>10 月 30 日</time><span>学签到期</span></li>
+          <li><time>毕业后 180 天内</time><span>完成毕业工签申请</span></li>
+        </ol>
+        <div class="risk-callout">
+          <strong>关键约束</strong>
+          <p>毕业工签一生只有一次机会，且要在毕业后 180 天内完成申请。</p>
+        </div>
+        <div class="strategy-grid">
+          <div class="panel">
+            <h3>首选路径：加拿大</h3>
+            <p>如果可以在剩余的加拿大时间内找到工作的话，我偏向于想留在加拿大工作。因为如果先回国，在待业状态下再想回加拿大找工作的可能性确实不大。</p>
+          </div>
+          <div class="panel">
+            <h3>风险分摊：双线求职</h3>
+            <p>但因为时间很紧，我最近的压力真的很大，不过也不能孤注一掷，<strong class="underline">国内国外两边一起找工作，双管齐下</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="observation">
+        <div class="section-title">
+          <span class="section-code">04 / OBSERVATION</span>
+          <h2>同学动向与个人状态评估</h2>
+        </div>
+        <div class="observation">
+          <p>最近我也了解了一下周围同学的动向：我们同班同学中，有一部分人目前在零售店、火锅店做兼职。严同学前段时间去考了雅思，但尚未达到工签要求的水平（其实平时我就觉得他口语讲得很烂，不知道他为什么那么自信）；谢欢则表示她打算最终展示结束后投入备考雅思、处理公寓事宜，九月初再回国，她认为加拿大的工签白拿白不拿所以也申请一下，但大概率不会在本地找工作（她的口语水平和严同学不相上下）。</p>
+          <p>有些留学生觉得出来英语反而变烂了，说自己现在的水平没有在国内专门备考时好。但我本人在此之前虽然无法完全评估自己的口语变化，但这段时间因为在疯狂练习发言稿和 Presentation，我明显感觉到自己的口语实力和英文思维是有切实提升，我将<span class="key-point">克服曾经口语考试低分的阴影，继续高强度训练自己！</span></p>
+        </div>
+      </section>
+
+      <section class="outlook" aria-label="后续计划与沟通">
+        <div class="section-title" style="border-bottom-color: rgba(255,255,255,.2);">
+          <span class="section-code" style="color:#8fb9f3;">05 / NEXT UPDATE</span>
+          <h2>后续计划与沟通</h2>
+        </div>
+        <p>爸爸妈妈，之前因为压力太大，我都有点不敢跟你们沟通了，每次聊天心里都很别扭和难受。有时候只是晚上想和你们打打电话说一些生活的事情，但是想着可能又会讲别的，然后又睡得很难受。</p>
+        <p>我一直在思考，也已经走出了行动的第一步。<strong class="underline">等这几天面谈完有了新反馈，我再随时跟你们同步！</strong></p>
+      </section>
+
+      <footer>
+        <span>毕业与职业规划 · 进度同步</span>
+        <span>状态：持续行动，及时反馈</span>
+      </footer>
+    </main>
+  </article>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>给爸爸妈妈的一封近况信</title>
+  <style>
+    :root {
+      --paper: #fffdf8;
+      --page: #f4ecde;
+      --ink: #382f2a;
+      --muted: #74665c;
+      --warm: #a64b3c;
+      --warm-soft: #f4ded1;
+      --gold: #bd7d2d;
+      --line: #decfbd;
+      --shadow: 0 20px 55px rgba(91, 61, 35, 0.13);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 14% 8%, rgba(255,255,255,.72), transparent 28rem),
+        linear-gradient(145deg, #eee2d1 0%, var(--page) 48%, #eadcc9 100%);
+      color: var(--ink);
+      font-family: "Songti SC", "STSong", "Noto Serif CJK SC", "Microsoft YaHei", serif;
+      font-size: 20px;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: min(900px, calc(100% - 32px));
+      margin: 44px auto;
+      padding: clamp(34px, 7vw, 78px);
+      background: var(--paper);
+      border: 1px solid rgba(166, 75, 60, 0.16);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(189, 125, 45, .2);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    header,
+    main,
+    footer { position: relative; z-index: 1; }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--warm);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 14em;
+      color: #49352d;
+      font-size: clamp(34px, 5.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: .04em;
+      line-height: 1.32;
+    }
+
+    .subtitle {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .salutation {
+      margin: 50px 0 20px;
+      color: var(--warm);
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    p { margin: 0 0 1.2em; }
+
+    .intro {
+      font-size: 21px;
+      line-height: 2;
+    }
+
+    .section {
+      margin-top: 56px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      align-items: start;
+      gap: 15px;
+      margin: 0 0 24px;
+    }
+
+    .section-number {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--warm-soft);
+      color: var(--warm);
+      font-family: Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 3px 0 0;
+      font-size: 27px;
+      line-height: 1.5;
+      color: #5d352d;
+    }
+
+    .note {
+      margin: 28px 0;
+      padding: 20px 24px;
+      background: #faf1e7;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .note p:last-child { margin-bottom: 0; }
+
+    .cards {
+      display: grid;
+      gap: 18px;
+      margin: 26px 0 30px;
+    }
+
+    .card {
+      padding: 22px 24px 20px;
+      background: #fffaf2;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      margin: 0 0 9px;
+      color: var(--warm);
+      font-size: 21px;
+      line-height: 1.55;
+    }
+
+    .card p { margin: 0; }
+
+    .career .card {
+      position: relative;
+      padding-left: 30px;
+    }
+
+    .career .card::before {
+      content: "";
+      position: absolute;
+      top: 25px;
+      left: 14px;
+      width: 6px;
+      height: 32px;
+      border-radius: 99px;
+      background: #d7a04f;
+    }
+
+    mark {
+      padding: .08em .22em;
+      background: linear-gradient(transparent 38%, #f5dda6 38%, #f5dda6 91%, transparent 91%);
+      color: inherit;
+      font-weight: 700;
+    }
+
+    .underline {
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-color: #d39a70;
+      text-decoration-thickness: .15em;
+      text-underline-offset: .18em;
+    }
+
+    .deadline-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .deadline {
+      padding: 18px 14px;
+      text-align: center;
+      background: #f9eee4;
+      border-radius: 10px;
+    }
+
+    .deadline strong {
+      display: block;
+      color: var(--warm);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 22px;
+      line-height: 1.4;
+    }
+
+    .deadline span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .closing {
+      margin-top: 56px;
+      padding-top: 30px;
+      border-top: 1px solid var(--line);
+      font-size: 21px;
+      line-height: 2;
+    }
+
+    .signature {
+      margin: 34px 0 0;
+      text-align: right;
+      color: var(--warm);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 52px;
+      color: #9a8777;
+      text-align: center;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      letter-spacing: .08em;
+    }
+
+    @media (max-width: 700px) {
+      body { font-size: 18px; }
+      .page { width: 100%; margin: 0; border: 0; border-radius: 0; padding: 42px 24px 54px; }
+      .page::before { inset: 8px; }
+      .intro, .closing { font-size: 19px; }
+      .section { margin-top: 44px; }
+      .section-heading { grid-template-columns: 40px 1fr; gap: 12px; }
+      .section-number { width: 40px; height: 40px; font-size: 18px; }
+      h2 { font-size: 23px; }
+      .deadline-list { grid-template-columns: 1fr; }
+      .deadline { text-align: left; padding: 16px 18px; }
+      .deadline strong, .deadline span { display: inline; }
+      .deadline span { margin-left: 8px; }
+    }
+
+    @media print {
+      body { background: #fff; font-size: 17px; }
+      .page { width: 100%; margin: 0; padding: 22mm 20mm; border: 0; box-shadow: none; }
+      .page::before { display: none; }
+      .section, .card, .note { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header>
+      <p class="eyebrow">A letter home · 7月22日进度同步</p>
+      <h1>关于我最近的毕业进度与未来规划</h1>
+      <p class="subtitle">把我的进展、时间线与职业思考，认真地说给爸爸妈妈听。</p>
+    </header>
+
+    <main>
+      <p class="salutation">爸爸妈妈，你们好：</p>
+      <p class="intro">最近这几天我努力高强度地思考和行动。我刷到一个视频：老板布置任务后不应该完成的时候再反馈，要实时汇报进度。我觉得我们全家人现在都在一起努力，我也应该主动把我的最新进展、时间线以及我对自己职业方向的深度思考同步给你们，让你们了解，也可以更好地支持我。</p>
+
+      <section class="section" id="study">
+        <div class="section-heading">
+          <span class="section-number">一</span>
+          <h2>当前学业进度与找工作第一步</h2>
+        </div>
+        <div class="note">
+          <p>这周的前几天以及接下来的时间，我的核心任务是<strong class="underline">全力准备论文的终稿和最后的展示（Presentation）环节</strong>，这是顺利毕业的基石。</p>
+        </div>
+        <p>同时，针对毕业后的规划，我已经开始动起来了：</p>
+        <div class="cards">
+          <div class="card">
+            <h3>海外方向</h3>
+            <p>这几天我正在密集预约和我的 Mentor（导师）、TA（博士生学姐）以及林学院的 Admission &amp; Admin Coordinator 进行对话，去摸清本地的求职资源和学术时间线。</p>
+          </div>
+          <div class="card">
+            <h3>国内方向</h3>
+            <p>我也开始着手了解，目前去看了一些留学生回国（比如杭州）的引才政策，目前看来是以各类补贴居多。后续方向和信息搜索仍需要加强。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="career">
+        <div class="section-heading">
+          <span class="section-number">二</span>
+          <h2>结合我自身背景的三大职业方向思考</h2>
+        </div>
+        <p>结合我的<mark>“英语本科 + UBC 林业硕士”的交叉背景</mark>，以及我个人的兴趣，我目前梳理出了三个非常清晰的就业与发展方向。</p>
+        <p class="subtitle">在接下来的导师、学姐面谈中，可能会有更多新的想法。</p>
+        <div class="cards career">
+          <div class="card">
+            <h3>01 · 继续深造或对口专业方向（NGO、可持续发展）</h3>
+            <p>发挥 UBC 林业专业的顶尖口碑，去投递相关的国际非政府组织（NGO）或可持续发展部门。在这个方向上，我想到达的最高位置是加入联合国等国际组织，充分发挥专业价值。</p>
+          </div>
+          <div class="card">
+            <h3>02 · 时代风口行业（AI 应用端）</h3>
+            <p>我敏锐地意识到很多 AI 企业正在飞速发展。除了开发 AI 的工程师和程序员之外，企业其实更需要大量会高阶使用 AI 工具的人。就国内而言，大部分高校内尚未对非人工智能专业的学生进行专业的 AI 使用培训，而企业却在更多地使用，这说明中间仍有巨大的学习和培训红利余地。</p>
+          </div>
+          <div class="card">
+            <h3>03 · 产品经理（PM）或项目经理</h3>
+            <p>我意识到自己对产品的开发、项目的策划与落地等工作有着比较高的兴趣。比起从 0 开始凭灵感做一个全新的东西，我对<mark>“让一个东西从 1 到 100 真正进入到市场中”</mark>的过程感到十分兴奋。而且 PM 是各种公司不可或缺的职位，在这个方向上，我会想要加入全球范围内各个产业内最前沿的国际企业。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="deadline">
+        <div class="section-heading">
+          <span class="section-number">三</span>
+          <h2>明确截止日期，国内外双管齐下</h2>
+        </div>
+        <p>这几天我也看到一个视频说：有钱人为什么能积累财富，就是因为他们看到机会就会行动、就会下手，因为这个机会是不会等待你的。（虽然说也需要考虑对这些人来说可能本来试错成本就小。）</p>
+        <p>我非常清楚眼前的现实压力：</p>
+        <div class="deadline-list" aria-label="三个重要时间节点">
+          <div class="deadline"><strong>8 月</strong><span>结束课程</span></div>
+          <div class="deadline"><strong>8 月 31 日</strong><span>当前房租截止</span></div>
+          <div class="deadline"><strong>10 月 30 日</strong><span>学签到期</span></div>
+        </div>
+        <div class="note">
+          <p><mark>毕业工签一生只有一次机会，且要在毕业后 180 天内完成申请。</mark></p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <h3>我的首选偏向</h3>
+            <p>如果可以在剩余的加拿大时间内找到工作的话，我偏向于想留在加拿大工作。因为如果先回国，在待业状态下再想回加拿大找工作的可能性确实不大。</p>
+          </div>
+          <div class="card">
+            <h3>我的风险分摊</h3>
+            <p>但因为时间很紧，我最近的压力真的很大，不过也不能孤注一掷，<strong class="underline">国内国外两边一起找工作，双管齐下</strong>。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="mindset">
+        <div class="section-heading">
+          <span class="section-number">四</span>
+          <h2>身边同学的动向与我的心态转变</h2>
+        </div>
+        <p>最近我也了解了一下周围同学的动向：我们同班同学中，有一部分人目前在零售店、火锅店做兼职。严同学前段时间去考了雅思，但尚未达到工签要求的水平（其实平时我就觉得他口语讲得很烂，不知道他为什么那么自信）；谢欢则表示她打算最终展示结束后投入备考雅思、处理公寓事宜，九月初再回国，她认为加拿大的工签白拿白不拿所以也申请一下，但大概率不会在本地找工作（她的口语水平和严同学不相上下）。</p>
+        <p>有些留学生觉得出来英语反而变烂了，说自己现在的水平没有在国内专门备考时好。但我本人在此之前虽然无法完全评估自己的口语变化，但这段时间因为在疯狂练习发言稿和 Presentation，我明显感觉到自己的口语实力和英文思维是有切实提升，我将<mark>克服曾经口语考试低分的阴影，继续高强度训练自己！</mark></p>
+      </section>
+
+      <section class="closing" aria-label="结语">
+        <p>爸爸妈妈，之前因为压力太大，我都有点不敢跟你们沟通了，每次聊天心里都很别扭和难受。有时候只是晚上想和你们打打电话说一些生活的事情，但是想着可能又会讲别的，然后又睡得很难受。</p>
+        <p>我一直在思考，也已经走出了行动的第一步。<strong class="underline">等这几天面谈完有了新反馈，我再随时跟你们同步！</strong></p>
+        <p class="signature">想把近况认真告诉你们的孩子</p>
+      </section>
+    </main>
+
+    <footer>愿每一次同步，都让牵挂变得更安心。</footer>
+  </article>
+</body>
+</html>
